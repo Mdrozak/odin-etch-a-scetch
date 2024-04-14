@@ -1,8 +1,11 @@
-// 1. Create divs using only Js in starting grid 16x16
-
-// Get #container selector
 let divContainer = document.querySelector("#container")
 let inputButton = document.querySelector("#grid-button")
+
+inputButton.addEventListener("click", getInput)
+
+divContainer.addEventListener("mouseover", function (event) {
+    event.target.id === "container" ? null : event.target.style.background = "red"
+})
 
 function createDivGrid (grid) {
 
@@ -15,25 +18,9 @@ function createDivGrid (grid) {
 
 }
 
-
-// 2. Use flexbox for those divs
-// added in style css
-
-// 3. Add hover effect to change divs color when mouse passes over them
-// leaving pixelated trial through grid
-divContainer.addEventListener("mouseover", function (event) {
-    event.target.id === "container" ? null : event.target.style.background = "red"
-})
-
-// 4. Add button on top, that triggers popup for user input for square number per side for new grid
-// after entering, remove existing grid and generate new grid in the same total space as before
-inputButton.addEventListener("click", getInput)
-
 function getInput () {
     let userInput = parseInt(prompt("Please input desired grid size between 1 and 100"))
-    // 5. Limit for user input 100
     userInput > 100 || userInput <= 0 ? alert("Please input value between 1 and 100") : resetGrid(userInput)
-    
 }
 
 function removeGridChildren () {
