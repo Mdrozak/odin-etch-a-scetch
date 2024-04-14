@@ -20,7 +20,7 @@ function createDivGrid (grid) {
 // 3. Add hover effect to change divs color when mouse passes over them
 // leaving pixelated trial through grid
 divContainer.addEventListener("mouseover", function (event) {
-    event.target.style.background = "red"
+    event.target.id === "container" ? "" : event.target.style.background = "red"
 })
 
 // 4. Add button on top, that triggers popup for user input for square number per side for new grid
