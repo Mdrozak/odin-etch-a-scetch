@@ -4,8 +4,9 @@ let inputButton = document.querySelector("#grid-button")
 inputButton.addEventListener("click", getInput)
 
 divContainer.addEventListener("mouseover", function (event) {
-    event.target.id === "container" ? null : event.target.style.background = generateRandomRGB()
-        
+    event.target.id === "container" ? null : event.target.style.background.length === 0 ?
+    event.target.style.background = generateRandomRGB() : event.target.style.filter = changeBrightness (event.target.style.filter)
+
 })
 
 function createDivGrid (grid) {
@@ -42,12 +43,14 @@ function generateRandomRGB () {
     let partGreen = Math.floor(Math.random()*257)
     let partBlue = Math.floor(Math.random()*257)
 
-    return `rgb(${partRed},${partGreen},${partBlue})`
+    return `rgba(${partRed},${partGreen},${partBlue})`
 }
 
+function changeBrightness (filterOption) {
+    let filterProps = filterOption.length > 0 ? filterOption : "brightness(1)"
+    let slicedBrightnessValue = filterProps.slice(filterProps.indexOf("(")+1,filterProps.lastIndexOf(")"))
 
-// Extra - Add progressive darkening effect, where each interaction dakrens the square by 10%,
-// achive a completly black square in only ten interactions
-// research opacity CSS property
+    return `brightness(${slicedBrightnessValue - 0.1})`
+}
 
 createDivGrid(16)
